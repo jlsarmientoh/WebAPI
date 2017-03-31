@@ -22,9 +22,17 @@ namespace WebAPI.Controllers
         private IProductService productService = new ProductService();
 
         // GET: api/Products
-        public IEnumerable<ProductModel> GetProduct()
+        [ResponseType(typeof(IEnumerable<ProductModel>))]
+        public IHttpActionResult GetProduct()
         {
-            return productService.getAllProducts();
+            try
+            {
+                return Ok(productService.getAllProducts());
+            }
+            catch(GetProductsException e)
+            {
+                return InternalServerError(e);
+            }
         }
 
         // GET: api/Products/5
