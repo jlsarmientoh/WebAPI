@@ -50,38 +50,44 @@ namespace WebAPI.Adapters
 
         private Product AdaptSingleFromProductModel(ProductModel productModel)
         {
-            Product product = new Product();
-            product.Color = productModel.Color;
-            product.DiscontinuedDate = productModel.DiscontinuedDate;
-            product.ProductID = productModel.Id;
-            product.ListPrice = productModel.ListPrice;
-            product.Name = productModel.Name;
-            product.ProductNumber = productModel.ProductNumber;
-            product.SellEndDate = productModel.SellEndDate;
-            product.SellStartDate = productModel.SellStartDate;
-            product.Size = productModel.Size;
-            product.StandardCost = productModel.StandardCost;
-            product.ThumbNailPhoto = productModel.ThumbNailPhoto;
-            product.Weight = productModel.Weight;
+            Product product = new Product()
+            {
+                Color = productModel.Color,
+                DiscontinuedDate = productModel.DiscontinuedDate,
+                ProductID = productModel.Id,
+                ListPrice = productModel.ListPrice,
+                Name = productModel.Name,
+                ProductNumber = productModel.ProductNumber,
+                SellEndDate = productModel.SellEndDate,
+                SellStartDate = productModel.SellStartDate,
+                Size = productModel.Size,
+                StandardCost = productModel.StandardCost,
+                ThumbNailPhoto = productModel.ThumbNailPhoto,
+                Weight = productModel.Weight,
+                ProductCategoryID = 1,
+                ProductModelID = 1
+            };
 
             return product;
         }
 
         private ProductModel AdaptSingleFromProduct(Product product)
         {
-            ProductModel productModel = new ProductModel();
-            productModel.Color = product.Color;
-            productModel.DiscontinuedDate = product.DiscontinuedDate;
-            productModel.Id = product.ProductID;
-            productModel.ListPrice = product.ListPrice;
-            productModel.Name = product.Name;
-            productModel.ProductNumber = product.ProductNumber;
-            productModel.SellEndDate = product.SellEndDate;
-            productModel.SellStartDate = product.SellStartDate;
-            productModel.Size = product.Size;
-            productModel.StandardCost = product.StandardCost;
-            productModel.ThumbNailPhoto = product.ThumbNailPhoto;
-            productModel.Weight = product.Weight;
+            ProductModel productModel = new ProductModel()
+            {
+                Color = product.Color,
+                DiscontinuedDate = product.DiscontinuedDate,
+                Id = product.ProductID,
+                ListPrice = product.ListPrice,
+                Name = product.Name,
+                ProductNumber = product.ProductNumber,
+                SellEndDate = product.SellEndDate,
+                SellStartDate = product.SellStartDate,
+                Size = product.Size,
+                StandardCost = product.StandardCost,
+                ThumbNailPhoto = product.ThumbNailPhoto,
+                Weight = product.Weight
+            };
 
             return productModel;
         }

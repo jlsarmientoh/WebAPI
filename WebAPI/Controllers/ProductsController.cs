@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
+using WebAPI.Exceptions;
 using WebAPI.Models;
 using WebAPI.Service;
 
@@ -18,7 +19,7 @@ namespace WebAPI.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ProductsController : ApiController
     {
-        private ProductService productService = new ProductService();
+        private IProductService productService = new ProductService();
 
         // GET: api/Products
         public IEnumerable<ProductModel> GetProduct()
@@ -30,13 +31,20 @@ namespace WebAPI.Controllers
         [ResponseType(typeof(ProductModel))]
         public IHttpActionResult GetProduct(int id)
         {
-            ProductModel product = productService.getProductById(id);
-            if (product == null)
+            try
             {
-                return NotFound();
-            }
+                ProductModel product = productService.getProductById(id);
+                if (product == null)
+                {
+                    return NotFound();
+                }
 
-            return Ok(product);
+                return Ok(product);
+            }
+            catch(GetProductsException e)
+            {
+                return InternalServerError(e);
+            }
         }
 
         // POST: api/Products
