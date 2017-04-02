@@ -16,6 +16,7 @@ namespace WebAPI.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<Product>()
                 .Property(e => e.StandardCost)
                 .HasPrecision(19, 4);

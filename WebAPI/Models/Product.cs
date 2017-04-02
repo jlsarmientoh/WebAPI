@@ -9,6 +9,7 @@ namespace WebAPI.Models
     [Table("SalesLT.Product")]
     public partial class Product
     {
+
         public int ProductID { get; set; }
 
         [Required]
@@ -48,7 +49,7 @@ namespace WebAPI.Models
         [StringLength(50)]
         public string ThumbnailPhotoFileName { get; set; }
 
-        public Guid rowguid { get; set; }
+        /*public Guid? rowguid { get; set; }*/
 
         public DateTime ModifiedDate { get; set; }
     }

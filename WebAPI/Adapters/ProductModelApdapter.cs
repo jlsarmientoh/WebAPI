@@ -65,7 +65,8 @@ namespace WebAPI.Adapters
                 ThumbNailPhoto = productModel.ThumbNailPhoto,
                 Weight = productModel.Weight,
                 ProductCategoryID = 1,
-                ProductModelID = 1
+                ProductModelID = 1,
+                ModifiedDate = DateTime.Now
             };
 
             return product;
