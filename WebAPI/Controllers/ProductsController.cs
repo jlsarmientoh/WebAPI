@@ -22,12 +22,12 @@ namespace WebAPI.Controllers
         private IProductService productService = new ProductService();
 
         // GET: api/Products
-        [ResponseType(typeof(IEnumerable<ProductModel>))]
-        public IHttpActionResult GetProduct()
+        [ResponseType(typeof(ProductResponse))]
+        public IHttpActionResult GetProduct(int fromIndex, int maxResults)
         {
             try
             {
-                return Ok(productService.getAllProducts());
+                return Ok(productService.getAllProducts(fromIndex, maxResults));
             }
             catch(GetProductsException e)
             {
@@ -36,12 +36,12 @@ namespace WebAPI.Controllers
         }
 
         // GET: api/Products/5
-        [ResponseType(typeof(ProductModel))]
+        [ResponseType(typeof(ProductResponse))]
         public IHttpActionResult GetProduct(int id)
         {
             try
             {
-                ProductModel product = productService.getProductById(id);
+                ProductResponse product = productService.getProductById(id);
                 if (product == null)
                 {
                     return NotFound();

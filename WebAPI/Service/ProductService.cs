@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
@@ -15,13 +17,21 @@ namespace WebAPI.Service
 
         private IModelAdapter<Product, ProductModel> productModelAdapter = new ProductModelApdapter();
 
-        public IEnumerable<ProductModel> getAllProducts()
+        public ProductResponse getAllProducts(int fromIndex, int maxResults)
         {
             try
             {
-                IQueryable<Product> productos = db.Product;
+                IOrderedQueryable<Product> orderedProducts = db.Product.OrderBy(p => p.ListPrice);
+                IQueryable<Product> products = orderedProducts.Skip(fromIndex).Take(maxResults);
+                
 
-                return productModelAdapter.AdaptAll(productos);
+                ProductResponse productsResult = new ProductResponse()
+                {
+                    TotalResults = orderedProducts.Count(),
+                    Results = productModelAdapter.AdaptAll(products)
+                };
+
+                return productsResult;
             }
             catch(Exception e)
             {
@@ -31,7 +41,7 @@ namespace WebAPI.Service
             
         }
 
-        public ProductModel getProductById(int id)
+        public ProductResponse getProductById(int id)
         {
             try
             {
@@ -42,7 +52,13 @@ namespace WebAPI.Service
                     return null;
                 }
 
-                return productModelAdapter.AdaptTo(product);
+                ProductResponse productsResult = new ProductResponse()
+                {
+                    TotalResults = 0,
+                    Results = new List<ProductModel>() { productModelAdapter.AdaptTo(product) }
+                };
+
+                return productsResult;
             }
             catch(Exception e)
             {

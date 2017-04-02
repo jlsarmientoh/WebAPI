@@ -6,7 +6,7 @@ namespace WebAPI.Service
     public interface IProductService
     {
         ProductModel addProduct(ProductModel productModel);
-        IEnumerable<ProductModel> getAllProducts();
-        ProductModel getProductById(int id);
+        ProductResponse getAllProducts(int fromIndex, int maxResults);
+        ProductResponse getProductById(int id);
     }
 }
