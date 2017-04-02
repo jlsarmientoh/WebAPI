@@ -78,7 +78,7 @@ namespace WebAPI.Service
 
                 productModel.Id = product.ProductID;
                 return productModel;
-            } catch(DbUpdateException e)
+            } catch(Exception e)
             {
                 string errorMessage = e.InnerException != null ? e.InnerException.Message : e.Message;
                 throw new CreateProductException(errorMessage);
